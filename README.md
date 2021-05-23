@@ -1,6 +1,6 @@
-#Core Java Basics Training
+# Core Java Basics Training
 
-##Run
+## Run
 
 - install java 1.8 jdk and Eclipse
 - Clone the repository and run
