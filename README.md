@@ -2,5 +2,5 @@
 
 ##Run
 
--install java 1.8 jdk and Eclipse
--Clone the repository and run
+- install java 1.8 jdk and Eclipse
+- Clone the repository and run
