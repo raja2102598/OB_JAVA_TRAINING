@@ -6,17 +6,17 @@ public class GuessingGame {
 
 	public static void main(String[] args) {
 		String key="z";
+		String userInput;
 		Scanner scanner=new Scanner(System.in);
 		System.out.println("Hi,Welcome to the Guessing Game !!!!");
-		for(int i=0;i<50;i++) {
+		for (int i=0;i<50;i++) {
 			System.out.println("Enter the Character: ");
-			String user_input = scanner.nextLine();
-			if(user_input.equals(key)) {
+			userInput = scanner.nextLine();
+			if (userInput.equals(key)) {
 				System.out.println("You Are Right!!!!!!!\nCongrats......");
 				scanner.close();
 				break;
-			}
-			else if(user_input!=key) {
+			} else if (userInput!=key) {
 				System.out.println("Try Again");
 			}
 		}
