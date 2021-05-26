@@ -9,35 +9,48 @@ public class EncodeDecode {
 		Scanner s = new Scanner(System.in);
 		System.out.print("Enter the String : ");
 		value = s.nextLine().toLowerCase();
-		StringBuilder encodedValue = encode(value);
-//		StringBuilder decodedValue = decode(encodedValue);
-		System.out.println(encodedValue);
+		int encodedValue[] = encode(value);
+		int decodedValue[] = decode(encodedValue);
+		System.out.println("Encoded Value \n");		
+		for(int i:encodedValue)
+			System.out.print(i+" ");
+		System.out.println("Decoded Value \n");
+		for(int i:decodedValue)
+			System.out.print(Character.toString(i));
 		
 	}
 
-	public static StringBuilder encode(String value) {
-		StringBuilder encodedStr=new StringBuilder();
-		for (int i = 0; i < value.length(); i++) {
+	public static int[] encode(String value) {
+		int[] encodedStr=new int[value.length()];
+		for (int i = 0,j=0; i < value.length(); i++) {
 			if ((value.charAt(i) >= 97) && (value.charAt(i) <= 122)) {
 //				System.out.print(value.charAt(i) - 96 +" ");
-				encodedStr.append(value.charAt(i) - 96+" ");
+				encodedStr[j]=value.charAt(i) - 96;
+				j++;
 			}
 			else if(value.charAt(i)==32) {
 //				System.out.print(value.charAt(i)+67 +" ");
-				encodedStr.append(value.charAt(i) + -32+" ");
+				encodedStr[j]=value.charAt(i)-32;
+				j++;
 			}
 		}
 		return encodedStr;
 	}
-//	public static StringBuilder decode(StringBuilder value) {
-//		StringBuilder decodedStr=new StringBuilder();
-//		for(int i=0,j=0;i<value.length();i++) {
-//			if(value.charAt(i)=='-') {
-//				System.out.print(value.substring(j, i));
-//				j=i;
-//			}
-//		}
-//		return decodedStr;
-//	}
+	public static int[] decode(int[] value) {
+		int[] decodedStr=new int[value.length];
+		
+		for (int i = 0,j=0; i < value.length; i++) {
+			if(value[i]>=1 && value[i]<=26) {
+				decodedStr[j]=value[i]+96;
+				j++;
+			}
+			else if(value[i]==0) {
+				decodedStr[j]=value[i]+32;
+				j++;
+			}
+			
+		}
+		return decodedStr;
+	}
 
 }
