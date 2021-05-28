@@ -4,7 +4,6 @@ public class ReThrow {
 	static void test1() throws Exception {
 		throw new Exception("Exception from test1");
 	}
-
 	static void test2() throws Exception {
 		try {
 			test1();
@@ -18,7 +17,7 @@ public class ReThrow {
 		try {
 			test2();
 		} catch (Exception e) {
-			System.out.println("in main \n" + e.getMessage());
+			System.out.println("in main --" + e.getMessage());
 		}
 	}
 }
