@@ -62,6 +62,63 @@ mysql> create trigger t1
     -> $$
 Query OK, 0 rows affected (0.02 sec)
 
+
+mysql> use onebilldemodb;
+Database changed
+mysql> delimiter $$
+mysql> create trigger t2
+    -> after insert
+    -> on sales
+    -> for each row
+    -> begin
+    -> update item set qoh=qoh-new.qtysold where itemid=new.itemid;
+    -> end $$
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> select * from sales;
+    -> $$
++-----+--------+---------+-------+-------+
+| sid | itemid | qtysold | price | total |
++-----+--------+---------+-------+-------+
+| 101 |      2 |      10 |   100 |  1000 |
+| 102 |      1 |      10 |    10 |   100 |
++-----+--------+---------+-------+-------+
+2 rows in set (0.02 sec)
+
+mysql> delimiter ;
+mysql> select * from item;
++--------+---------+------+-------+-----------+
+| itemid | iemdesc | qoh  | price | category  |
++--------+---------+------+-------+-----------+
+|      1 | Perfume |  190 |   100 | cosmetics |
+|      2 | Marie   |  200 |    10 | snacks    |
++--------+---------+------+-------+-----------+
+2 rows in set (0.00 sec)
+
+mysql> insert into sales values(103,2,100,10,0);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from item;
++--------+---------+------+-------+-----------+
+| itemid | iemdesc | qoh  | price | category  |
++--------+---------+------+-------+-----------+
+|      1 | Perfume |  190 |   100 | cosmetics |
+|      2 | Marie   |  100 |    10 | snacks    |
++--------+---------+------+-------+-----------+
+2 rows in set (0.00 sec)
+
+mysql> select * from sales;
++-----+--------+---------+-------+-------+
+| sid | itemid | qtysold | price | total |
++-----+--------+---------+-------+-------+
+| 101 |      2 |      10 |   100 |  1000 |
+| 102 |      1 |      10 |    10 |   100 |
+| 103 |      2 |     100 |    10 |  1000 |
++-----+--------+---------+-------+-------+
+3 rows in set (0.00 sec)
+
+
+
 mysql> drop procedure printemployee;
     -> $$
 Query OK, 0 rows affected (0.02 sec)
